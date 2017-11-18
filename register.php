@@ -19,11 +19,16 @@ if(Input::exists()) {
             )
         ));
         if($validation->passed()) {
-            $login = $user->login(strtolower(Input::get('username')), Input::get('password'), false);
-            if($login) {
-                Redirect::to('index.php');
+            $salt = Hash::salt(32);
+            $register = $user->create(array(
+              'username' => escape(Input::get('username')),
+              'password' => Hash::make(escape(Input::get('password')), $salt),
+              'salt' => $salt
+            ));
+            if($register) {
+              Redirect::to('login.php');
             }else{
-                $errors = 'An error occurred while attempting to process your login request. An incorrect username or password was entered.';
+              $errors = 'An error occurred while attempting to process your register request.';
             }
         }else{
             $errors = '';
@@ -38,11 +43,11 @@ if(Input::exists()) {
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>CNT4406 - Login</title>
+    <title>CNT4406 - Register</title>
 </head>
 <body>
-    <a href="register.php">Register</a><br />
-    <h1>Login</h1>
+  <a href="login.php">Login</a><br />
+    <h1>Register</h1>
     <form role="form" action="" method="POST">
         <?php
         if(!empty($errors)) {
@@ -51,7 +56,7 @@ if(Input::exists()) {
         ?>
         Username: <input type="text" name="username" id="username"><br /><br />
         Password: <input type="password" name="password" id="password"><br /><br />
-        <input type="submit" value="Login">
+        <input type="submit" value="Register">
         <input type="hidden" name="token" value="<?php echo Token::generate(); ?>" />
     </form>
 </body>
