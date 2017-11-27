@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 18, 2017 at 02:00 PM
+-- Generation Time: Nov 27, 2017 at 09:53 AM
 -- Server version: 5.7.20-0ubuntu0.16.04.1
 -- PHP Version: 7.0.22-0ubuntu0.16.04.1
 
@@ -29,8 +29,11 @@ SET time_zone = "+00:00";
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(100) NOT NULL,
-  `password` varchar(64) NOT NULL,
-  `salt` varchar(40) NOT NULL
+  `passwordsha256salt` varchar(64) NOT NULL,
+  `passwordsha256` varchar(64) NOT NULL,
+  `passwordmd5salt` varchar(64) NOT NULL,
+  `passwordmd5` varchar(64) NOT NULL,
+  `salt` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

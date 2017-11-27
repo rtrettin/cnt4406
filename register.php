@@ -12,7 +12,8 @@ if(Input::exists()) {
             'username' => array(
                 'required' => true,
                 'max' => 100,
-                'min' => 5
+                'min' => 5,
+                'unique' => true
             ),
             'password' => array(
                 'required' => true
@@ -22,14 +23,13 @@ if(Input::exists()) {
             $salt = Hash::salt(32);
             $register = $user->create(array(
               'username' => escape(Input::get('username')),
-              'password' => Hash::make(escape(Input::get('password')), $salt),
+              'passwordsha256salt' => Hash::make(escape(Input::get('password')), $salt),
+              'passwordsha256' => Hash::makeNoSalt(escape(Input::get('password'))),
+              'passwordmd5salt' => Hash::makeMD5(escape(Input::get('password')), $salt),
+              'passwordmd5' => Hash::makeMD5NoSalt(escape(Input::get('password'))),
               'salt' => $salt
             ));
-            if($register) {
-              Redirect::to('login.php');
-            }else{
-              $errors = 'An error occurred while attempting to process your register request.';
-            }
+            Redirect::to('login.php');
         }else{
             $errors = '';
             foreach($validation->errors() as $error) {
