@@ -33,6 +33,7 @@ CREATE TABLE `users` (
   `passwordsha256` varchar(64) NOT NULL,
   `passwordmd5salt` varchar(64) NOT NULL,
   `passwordmd5` varchar(64) NOT NULL,
+  `passwordplain` varchar(100) NOT NULL,
   `salt` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

@@ -54,7 +54,7 @@ class User {
 		}else{
 			$user = $this->find($username);
 			if($user) {
-				if($this->data()->password === Hash::make($password, $this->data()->salt)) {
+				if($this->data()->passwordsha256salt === Hash::make($password, $this->data()->salt)) {
 					Session::put($this->_sessionName, $this->data()->id);
 
 					if($remember) {

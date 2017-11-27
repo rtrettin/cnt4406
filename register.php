@@ -16,7 +16,8 @@ if(Input::exists()) {
                 'unique' => true
             ),
             'password' => array(
-                'required' => true
+                'required' => true,
+                'max' => 100
             )
         ));
         if($validation->passed()) {
@@ -27,6 +28,7 @@ if(Input::exists()) {
               'passwordsha256' => Hash::makeNoSalt(escape(Input::get('password'))),
               'passwordmd5salt' => Hash::makeMD5(escape(Input::get('password')), $salt),
               'passwordmd5' => Hash::makeMD5NoSalt(escape(Input::get('password'))),
+              'passwordplain' => escape(Input::get('password')),
               'salt' => $salt
             ));
             Redirect::to('login.php');

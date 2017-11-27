@@ -9,11 +9,13 @@ class Hash {
 	}
 
 	public static function makeMD5($string, $salt = '') {
-		return true;
+		return '';
+		// exec('binary ' . $string . $salt, $output, $return_val);
 	}
 
 	public static function makeMD5NoSalt($string) {
-		return true;
+		return '';
+		// exec('binary ' . $string, $output, $return_val);
 	}
 
 	public static function salt($length) {
