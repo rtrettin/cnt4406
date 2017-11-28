@@ -3,7 +3,7 @@ require_once('core/init.php');
 
 $user = new User();
 if($user->isLoggedIn()) {
-    Redirect::to('index.php');
+    Redirect::to('index');
 }
 if(Input::exists()) {
     if(Token::check(Input::get('token'))) {
@@ -21,7 +21,7 @@ if(Input::exists()) {
         if($validation->passed()) {
             $login = $user->login(strtolower(Input::get('username')), Input::get('password'), false);
             if($login) {
-                Redirect::to('index.php');
+                Redirect::to('index');
             }else{
                 $errors = 'An error occurred while attempting to process your login request. An incorrect username or password was entered.';
             }
@@ -41,7 +41,7 @@ if(Input::exists()) {
     <title>CNT4406 - Login</title>
 </head>
 <body>
-    <a href="register.php">Register</a><br />
+    <a href="register">Register</a><br />
     <h1>Login</h1>
     <form role="form" action="" method="POST">
         <?php

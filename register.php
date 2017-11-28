@@ -3,7 +3,7 @@ require_once('core/init.php');
 
 $user = new User();
 if($user->isLoggedIn()) {
-    Redirect::to('index.php');
+    Redirect::to('index');
 }
 if(Input::exists()) {
     if(Token::check(Input::get('token'))) {
@@ -31,7 +31,7 @@ if(Input::exists()) {
               'passwordplain' => escape(Input::get('password')),
               'salt' => $salt
             ));
-            Redirect::to('login.php');
+            Redirect::to('login');
         }else{
             $errors = '';
             foreach($validation->errors() as $error) {
@@ -48,7 +48,7 @@ if(Input::exists()) {
     <title>CNT4406 - Register</title>
 </head>
 <body>
-  <a href="login.php">Login</a><br />
+  <a href="login">Login</a><br />
     <h1>Register</h1>
     <form role="form" action="" method="POST">
         <?php

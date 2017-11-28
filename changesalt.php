@@ -2,7 +2,7 @@
 require_once('core/init.php');
 $user = new User();
 if(!$user->isLoggedIn()) {
-  Redirect::to('login.php');
+  Redirect::to('login');
 }else{
   $db = DB::getInstance();
   $newsalt = Hash::salt(32);
@@ -22,6 +22,6 @@ if(!$user->isLoggedIn()) {
   ));
   echo 'Salt changed...redirecting';
   sleep(5);
-  Redirect::to('index.php');
+  Redirect::to('index');
 }
 ?>

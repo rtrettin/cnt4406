@@ -2,7 +2,7 @@
 require_once('core/init.php');
 $user = new User();
 if(!$user->isLoggedIn()) {
-	Redirect::to('login.php');
+	Redirect::to('login');
 }
 ?>
 <!doctype html>
@@ -20,7 +20,7 @@ if(!$user->isLoggedIn()) {
 		</style>
   </head>
   <body>
-		<a href="logout.php">Logout</a><br /><br /><br />
+		<a href="logout">Logout</a><br /><br /><br />
 		<h3>Hello <?php echo $user->data()->username; ?>!</h3>
 		<p>Your session ID is: <?php echo $_COOKIE['PHPSESSID']; ?></p>
 		<br /><br />
@@ -41,7 +41,7 @@ if(!$user->isLoggedIn()) {
 		}
 		?>
 		<p><strong>Plaintext Password:</strong> <?php echo $passwordplain; ?></p>
-		<p><strong>Salt Value:</strong> <?php echo $salt; ?> <a href="changesalt.php">Change Salt</a></p>
+		<p><strong>Salt Value:</strong> <?php echo $salt; ?> <a href="changesalt">Change Salt</a></p>
 		<p><strong>SHA256+Salt Password*:</strong> <?php echo $passwordsha256salt; ?></p>
 		<p><strong>SHA256 Password:</strong> <?php echo $passwordsha256; ?></p>
 		<p><strong>MD5+Salt Password:</strong> <?php echo $passwordmd5salt; ?></p>

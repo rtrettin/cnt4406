@@ -9,13 +9,25 @@ class Hash {
 	}
 
 	public static function makeMD5($string, $salt = '') {
-		return '';
-		// exec('binary ' . $string . $salt, $output, $return_val);
+		$value = $string . $salt;
+		$value = escapeshellarg($value);
+		$value = escapeshellcmd($value);
+		$output = array();
+		$return_val = -1;
+		exec('/var/www/html/md5src/md5.x ' . $value, $output, $return_val);
+		sleep(2);
+		return $output[0];
 	}
 
 	public static function makeMD5NoSalt($string) {
-		return '';
-		// exec('binary ' . $string, $output, $return_val);
+		$value = $string;
+		$value = escapeshellarg($value);
+		$value = escapeshellcmd($value);
+		$output = array();
+		$return_val = -1;
+		exec('/var/www/html/md5src/md5.x ' . $value, $output, $return_val);
+		sleep(2);
+		return $output[0];
 	}
 
 	public static function salt($length) {
