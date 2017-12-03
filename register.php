@@ -21,17 +21,21 @@ if(Input::exists()) {
             )
         ));
         if($validation->passed()) {
-            $salt = Hash::salt(32);
-            $register = $user->create(array(
-              'username' => escape(Input::get('username')),
-              'passwordsha256salt' => Hash::make(escape(Input::get('password')), $salt),
-              'passwordsha256' => Hash::makeNoSalt(escape(Input::get('password'))),
-              'passwordmd5salt' => Hash::makeMD5(escape(Input::get('password')), $salt),
-              'passwordmd5' => Hash::makeMD5NoSalt(escape(Input::get('password'))),
-              'passwordplain' => escape(Input::get('password')),
-              'salt' => $salt
-            ));
-            Redirect::to('login');
+            try {
+              $salt = Hash::salt(32);
+              $register = $user->create(array(
+                'username' => escape(Input::get('username')),
+                'passwordsha256salt' => Hash::make(escape(Input::get('password')), $salt),
+                'passwordsha256' => Hash::makeNoSalt(escape(Input::get('password'))),
+                'passwordmd5salt' => Hash::makeMD5(escape(Input::get('password')), $salt),
+                'passwordmd5' => Hash::makeMD5NoSalt(escape(Input::get('password'))),
+                'passwordplain' => escape(Input::get('password')),
+                'salt' => $salt
+              ));
+              Redirect::to('login');
+            }catch(Exception $e) {
+              die($e->getMessage() . '; Salt: ' . $salt);
+            }
         }else{
             $errors = '';
             foreach($validation->errors() as $error) {

@@ -34,7 +34,7 @@ CREATE TABLE `users` (
   `passwordmd5salt` varchar(32) NOT NULL,
   `passwordmd5` varchar(32) NOT NULL,
   `passwordplain` varchar(100) NOT NULL,
-  `salt` varchar(32) NOT NULL
+  `salt` varchar(33) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
